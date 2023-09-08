@@ -1,0 +1,46 @@
+{
+    "credits": [
+      {
+        "id": "61dbae02-c147-4e28-863c-db7bd402b2d6",
+        "name": "Linear Algebra",
+        "mode": "IT154IU",
+        "time": "18/09/2023--14/01/2024",
+        "lecture": "P.H.Hà",
+        "lab": "Nope",
+        "createdAt": "4/20/2022, 2:21:56 PM",
+        "updatedAt": "4/20/2022, 2:21:56 PM"
+      },
+      {
+        "id": "4a3d9aaa-608c-49a7-a004-66305ad4ab50",
+        "name": "Algorithms & Data Structures",
+        "mode": "IT013IU",
+        "time": [
+            "02/10/2023--24/12/2023",
+            "18/09/2023--14/01/2024"
+        ],
+        "lecture": [
+            "N.T.Nghĩa",
+            "T.T.Tung"
+        ],
+        "lab": "Yes",
+        "createdAt": "1/25/2022, 1:15:44 PM",
+        "updatedAt": "3/10/2022, 8:21:56 AM"
+      },
+      {
+        "id": "d8be2362-7b68-4ea4-a1f6-03f8bc4eede7",
+        "name": "Computer Networks",
+        "mode": "IT091IU",
+        "time": [
+            "02/10/2023--24/12/2023",
+            "18/09/2023--14/01/2024"
+        ],
+        "lecture": [
+            "L.D.Tân",
+            "L.T.Son"
+        ],
+        "lab": "Yes",
+        "createdAt": "11/20/2021, 5:39:07 PM",
+        "updatedAt": "11/20/2021, 5:39:07 PM"
+      }
+    ]
+  }

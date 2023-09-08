@@ -2,26 +2,72 @@ const creditService = require("../services/creditService");
 
 const getAllCredits = (req,res) => {
     const allCredits = creditService.getAllCredits();
-    res.send("Get all credits");
+    res.send({ status: "OK", data: allCredits});
 };
 
 const getOneCredit = (req,res) => {
-    const credit = creditService.getOneCredit();
-    res.send("Get an existing credit");
+    const {
+        params: { creditId },
+    } = req;
+    
+    if (!creditId) {
+        return;
+    };
+
+    const credit = creditService.getOneCredit(creditId);
+    res.send({status:"OK", data: credit});
 };
 
 const createNewCredit = (req,res) => {
-    const createdCredit = creditService.createNewCredit();
-    res.send("Create a new credit");
+    const { body } = req;
+
+    if (
+        !body.name ||
+        !body.mode ||
+        !body.time ||
+        !body.lecture ||
+        !body.lab
+    ) {
+        return;
+    };
+
+    const newCredit = {
+        name: body.name,
+        mode: body.mode,
+        time: body.time,
+        lecture: body.lecture,
+        lab: body.lab
+    };
+
+    const createdCredit = creditService.createNewCredit(newCredit);
+    res.status(201).send({ status: "OK", data: createdCredit});
 };
 
 const updateOneCredit = (req,res) => {
-    const updatedCredit = creditService.updateOneCredit();
-    res.send("Update an existing credit");
+    const {
+        body,
+        params: { creditId }
+    } = req;
+
+    if (!creditId){
+        return;
+    }
+
+    const updatedCredit = creditService.updateOneCredit(creditId, body);
+    res.send({ status: "OK", data: updatedCredit});
 };
 
 const deleteOneCredit = (req,res) => {
-    res.send("Delete an existing credit");
+    const {
+        params: { creditId }
+    } = req;
+
+    if (!creditId){
+        return;
+    }
+
+    creditService.deleteOneCredit(creditId);
+    res.status(204).send({ status: "OK" });
 };
 
 module.exports = {
