@@ -1,8 +1,14 @@
 const creditService = require("../services/creditService");
 
 const getAllCredits = (req,res) => {
-    const allCredits = creditService.getAllCredits();
-    res.send({ status: "OK", data: allCredits});
+    try {
+        const allCredits = creditService.getAllCredits();
+        res.send({ status: "OK", data: allCredits});
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 const getOneCredit = (req,res) => {
@@ -11,11 +17,23 @@ const getOneCredit = (req,res) => {
     } = req;
     
     if (!creditId) {
-        return;
+        res
+        .status(400)
+        .send({
+          status: "FAILED",
+          data: { error: "Parameter ':creditId' can not be empty" },
+        });
+        return; 
     };
 
-    const credit = creditService.getOneCredit(creditId);
-    res.send({status:"OK", data: credit});
+    try {
+        const credit = creditService.getOneCredit(creditId);
+        res.send({status:"OK", data: credit});
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });        
+    }
 };
 
 const createNewCredit = (req,res) => {
@@ -28,6 +46,14 @@ const createNewCredit = (req,res) => {
         !body.lecture ||
         !body.lab
     ) {
+        res
+            .status(400)
+            .send({
+                status: "FAILED",
+                data: {
+                    error: "One of the following keys is missing or is empty in request body: 'name', 'mode', 'time', 'lecture', 'lab'",
+                }
+            })
         return;
     };
 
@@ -39,8 +65,14 @@ const createNewCredit = (req,res) => {
         lab: body.lab
     };
 
-    const createdCredit = creditService.createNewCredit(newCredit);
-    res.status(201).send({ status: "OK", data: createdCredit});
+    try {
+        const createdCredit = creditService.createNewCredit(newCredit);
+        res.status(201).send({ status: "OK", data: createdCredit});
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: {error: error?.message || error}});
+    }
 };
 
 const updateOneCredit = (req,res) => {
@@ -50,11 +82,24 @@ const updateOneCredit = (req,res) => {
     } = req;
 
     if (!creditId){
+        res
+        .status(400)
+        .send({
+          status: "FAILED",
+          data: { error: "Parameter ':creditId' can not be empty" },
+        });
         return;
     }
 
-    const updatedCredit = creditService.updateOneCredit(creditId, body);
-    res.send({ status: "OK", data: updatedCredit});
+    try {
+        const updatedCredit = creditService.updateOneCredit(creditId, body);
+        res.send({ status: "OK", data: updatedCredit});
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: {error: error?.message || error}});
+    }
+    
 };
 
 const deleteOneCredit = (req,res) => {
@@ -63,11 +108,24 @@ const deleteOneCredit = (req,res) => {
     } = req;
 
     if (!creditId){
+        res
+        .status(400)
+        .send({
+          status: "FAILED",
+          data: { error: "Parameter ':creditId' can not be empty" },
+        });
         return;
     }
 
-    creditService.deleteOneCredit(creditId);
-    res.status(204).send({ status: "OK" });
+    try {
+        creditService.deleteOneCredit(creditId);
+        res.status(204).send({ status: "OK" });
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: {error: error?.message || error}});        
+    }
+
 };
 
 module.exports = {

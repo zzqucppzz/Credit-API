@@ -1,13 +1,21 @@
 const Credit = require("../database/Credit");
 
 const getAllCredits = () => {
-    const allCredits = Credit.getAllCredits();
-    return allCredits;
+    try {
+        const allCredits = Credit.getAllCredits();
+        return allCredits;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const getOneCredit = (creditId) => {
-    const credit = Credit.getOneCredit(creditId);
-    return credit;
+    try {
+        const credit = Credit.getOneCredit(creditId);
+        return credit;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const createNewCredit = (newCredit) => {
@@ -18,17 +26,29 @@ const createNewCredit = (newCredit) => {
         updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
     };
 
-    const createdCredit = Credit.createNewCredit(creditToInsert);
-    return createdCredit;
+    try {
+        const createdCredit = Credit.createNewCredit(creditToInsert);
+        return createdCredit;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const updateOneCredit = (creditId, changes) => {
-    const updatedCredit = Credit.updateOneCredit(creditId,changes);
-    return updatedCredit;
+    try {
+        const updatedCredit = Credit.updateOneCredit(creditId,changes);
+        return updatedCredit;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const deleteOneCredit = (creditId) => {
-    Credit.deleteOneCredit(creditId);
+    try {
+        Credit.deleteOneCredit(creditId);
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = {
