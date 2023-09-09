@@ -1,8 +1,8 @@
 const Credit = require("../database/Credit");
 
-const getAllCredits = () => {
+const getAllCredits = (filterParams) => {
     try {
-        const allCredits = Credit.getAllCredits();
+        const allCredits = Credit.getAllCredits(filterParams);
         return allCredits;
     } catch (error) {
         throw error;

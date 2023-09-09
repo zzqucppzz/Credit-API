@@ -2,9 +2,15 @@ const DB = require("./db.json");
 
 const { saveToDatabase } = require("./utils");
 
-const getAllCredits = () => {
+const getAllCredits = (filterParams) => {
     try {
-        return DB.credits;
+        let credits = DB.credits;
+        if (filterParams.mode){
+            //return filterParams.mode;
+            return DB.credits.filter((credit) => credit.mode.toLowerCase().includes(filterParams.mode))
+        };
+        // Other if-statements will go here for different parameters
+        return credits;
     } catch (error) {
         throw { status: 500, message: error };
     }
