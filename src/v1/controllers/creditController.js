@@ -2,9 +2,8 @@ const creditService = require("../services/creditService");
 
 const getAllCredits = (req,res) => {
     const { mode } = req.query;
-
     try {
-        const allCredits = creditService.getAllCredits({ mode });
+        const allCredits = creditService.getAllCredits({mode});
         res.send({ status: "OK", data: allCredits});
     } catch (error) {
         res
